@@ -1,0 +1,14 @@
+<div class="petition">
+<h1>You may edit your profile here!</h1>
+<form method="POST">
+    <input name="firstname" type="text" placeholder="first name" value={{#profile}}{{firstname}}{{/profile}}></input>
+    <input name="lastname" type="text" placeholder="last name" value={{#profile}}{{lastname}}{{/profile}}></input>
+    <input name="email" type="email" placeholder="email"value={{#profile}}{{email}}{{/profile}}></input>
+    <input name="pass" type="password" placeholder="password"></input>
+    <input name="age" type="text" placeholder="Age" value={{#profile}}{{age}}{{/profile}}></input>
+    <input name="city" type="text" placeholder="City" value={{#profile}}{{city}}{{/profile}}></input>
+    <input name="url" type="url" placeholder="Homepage" value={{#profile}}{{url}}{{/profile}}></input>
+    <input type="hidden" name="_csrf" value="{{csrfToken}}"></input>
+<button>UPDATE</button>
+</form>
+</div>

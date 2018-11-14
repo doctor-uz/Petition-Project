@@ -1,0 +1,25 @@
+
+    <p id="par1">Sign this petition for a safer and a better world.</p>
+        <p id="par2">Together, our voice can make the WORLD safe!!!</p>
+
+
+
+<img id="no_war" src="no_war.jpg" alt="No_wars" height="200" width="200">
+
+<div class = 'petition'>
+    <form id = 'form' method="POST">
+        <input type="hidden" name="sig" value="">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <br><br>
+        <canvas id="canv" height="70px" width="476px" style="background: url('sign.png')"></canvas>
+        <br><br>
+        <button>Submit</button>
+    </form>
+
+</div>
+
+{{#if err}}
+    <p id="err">Oppss, something went wrong! <br> Please, fill out all fields!</p>
+{{/if}}
+
+<script src="/jquery-3.3.1.min.js" charset="utf-8"></script>

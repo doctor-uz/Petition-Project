@@ -1,0 +1,14 @@
+
+<div class="petition">
+    <h1>Sign in</h1>
+    {{#if err}}
+        <span class="error">{{err}}</span>
+    {{/if}}
+    <form class="" method="post">
+        <input type="text" name="email" placeholder="Email Address">
+        <input type="password" name="password" placeholder="Password">
+        <button type="submit">Sign in</button>
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    </form>
+    <span>Don't have an account yet? <a href="/register">Get it.</a></span>
+</div>
