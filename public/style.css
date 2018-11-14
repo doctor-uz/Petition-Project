@@ -73,9 +73,9 @@ p {
 }
 
 .petition {
-    position: fixed;
+    position: relative;
     display: flex;
-    left: 460px;
+    /* left: 460px; */
     top: 100px;
     align-items: center;
     justify-content: center;

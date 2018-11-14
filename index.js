@@ -53,18 +53,16 @@ app.use(function(req, res, next) {
 });
 
 app.get("/", (req, res) => {
-    res.redirect("/login");
+    res.redirect("/register");
     // console.log("this is req.session: ", req.session);
 });
 
 app.get("/register", (req, res) => {
     if (req.session.userId) {
         res.redirect("/profile");
-        return;
     }
     res.render("register", {
-        layout: "main",
-        title: "Sign up"
+        layout: "main"
     });
 });
 
@@ -85,7 +83,7 @@ app.post("/register", (req, res) => {
             console.log("Error in POST /register: ", err);
             res.render("register", {
                 layout: "main",
-                err: "Something went wrong, please try again."
+                err: err
             });
         });
 });
@@ -93,14 +91,13 @@ app.post("/register", (req, res) => {
 app.get("/profile", (req, res) => {
     res.render("profile", {
         layout: "main",
-        title: "More ...", ///---==========================todo
         err: "err"
     });
 });
 
 app.post("/profile", (req, res) => {
     return db
-        .writeUserProfile(
+        .createUserProfiles(
             req.body.age,
             req.body.city,
             req.body.url,
@@ -152,7 +149,7 @@ app.post("/login", (req, res) => {
         })
         .catch(err => {
             console.log("error in login: ", err);
-            res.render("logIn", {
+            res.render("login", {
                 layout: "main",
                 error: err
             });
@@ -165,10 +162,7 @@ app.get("/petition", (req, res) => {
         return;
     } else {
         res.render("petition", {
-            layout: "main",
-            title: "Petition page",
-            logout: "yes",
-            err: "err"
+            layout: "main"
         });
     }
 });
@@ -184,9 +178,7 @@ app.post("/petition", (req, res) => {
         .catch(function(err) {
             res.render("petition", {
                 layout: "main",
-                title: "Petition page",
-                logout: "yes",
-                err: err
+                err: "err"
             });
         });
 });
@@ -196,47 +188,47 @@ app.get("/thanks", (req, res) => {
     // console.log(req.session);
     if (!req.session.signaturesId) {
         res.redirect("/petition");
-        return;
+    } else {
+        const id = req.session.signaturesId;
+        // console.log("This is id: ", req.session.signatureId);
+        Promise.all([db.getSignature(id), db.countSigners()])
+            .then(results => {
+                const count = results[1].rows[0].count;
+                let text;
+                count < 2 ? (text = "supporter") : (text = "supporters");
+                res.render("thanks", {
+                    layout: "main",
+                    title: "Thank you",
+                    logout: "yes",
+                    link: "yes",
+                    base64str: results[0].rows[0].sig,
+                    count: count,
+                    text: `Have a look at ${count} ${text} so far.`
+                });
+            })
+            .catch(err => console.log("Error in GET /thanks: ", err));
     }
-    const id = req.session.signaturesId;
-    // console.log("This is id: ", req.session.signatureId);
-    Promise.all([db.getSignature(id), db.countSigners()])
-        .then(results => {
-            const count = results[1].rows[0].count;
-            let text;
-            count < 2 ? (text = "supporter") : (text = "supporters");
-            res.render("thanks", {
-                layout: "main",
-                title: "Thank you",
-                logout: "yes",
-                base64str: results[0].rows[0].sig,
-                count: count,
-                text: `Have a look at ${count} ${text} so far.`
-            });
-        })
-        .catch(err => console.log("Error in GET /thanks: ", err));
 });
 
 app.get("/signers", (req, res) => {
     if (!req.session.signaturesId) {
         res.redirect("/petition");
-        return;
+    } else {
+        Promise.all([db.getSigners(), db.countSigners()])
+            .then(function(results) {
+                let text;
+                results[1].rows[0].count < 2
+                    ? (text = "person has signed so far:")
+                    : (text = "people have signed so far:");
+                res.render("signers", {
+                    layout: "main",
+                    logout: "yes",
+                    text: `${results[1].rows[0].count} ${text}`,
+                    signers: results[0].rows //keep in touch
+                });
+            })
+            .catch(err => console.log("Error in GET /signers: ", err));
     }
-    Promise.all([db.getSigners(), db.countSigners()])
-        .then(function(results) {
-            let text;
-            results[1].rows[0].count < 2
-                ? (text = "person has signed so far:")
-                : (text = "people have signed so far:");
-            res.render("signers", {
-                layout: "main",
-                title: "Signers",
-                logout: "yes",
-                text: `${results[1].rows[0].count} ${text}`,
-                signers: results[0].rows
-            });
-        })
-        .catch(err => console.log("Error in GET /signers: ", err));
 });
 
 app.get("/signers/:city", (req, res) => {
@@ -252,7 +244,7 @@ app.get("/signers/:city", (req, res) => {
                 title: "Signers",
                 logout: "yes",
                 text: `${results[1].rows[0].count} ${text}`,
-                signers: results[0].rows,
+                signers: results[0].rows, //keep in touch
                 link: "yes"
             });
         })
@@ -275,9 +267,9 @@ app.get("/profile/edit", (req, res) => {
 
 app.post("/profile/edit", (req, res) => {
     let promises;
-    if (req.body.password != "") {
+    if (req.body.pass != "") {
         promises = [
-            hash(req.body.password).then(hash =>
+            hash(req.body.pass).then(hash =>
                 db.updateUser(
                     req.session.userId,
                     req.body.firstname,
@@ -330,26 +322,9 @@ app.post("/signature/delete", (req, res) => {
         });
 });
 
-// app.post("/delete", (req, res) => {
-//     db.deleteInfoFromSignatureTable(req.session.userID)
-//         .then(function() {
-//             db.deleteInfoFromUserProfileTable(req.session.userID);
-//         })
-//         .then(function() {
-//             db.deleteInfoFromUserTable(req.session.userID);
-//         })
-//         .then(function() {
-//             req.session = null;
-//             res.redirect("/?deleted_all=true");
-//         })
-//         .catch(function(err) {
-//             console.log("Error in deleting", err);
-//         });
-// });
-
 app.get("/logout", function(req, res) {
     req.session = null;
-    res.redirect("/login");
+    res.redirect("/register");
 });
 
 app.get("*", (req, res) => {

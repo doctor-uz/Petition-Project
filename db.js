@@ -21,18 +21,18 @@ exports.saveSigners = (sig, user_id) => {
 exports.getSigners = city => {
     if (city) {
         return db.query(
-            `SELECT u.firstname AS firstname, u.lastname AS lastname, p.age AS age, p.url AS URL
+            `SELECT u.firstname AS firstname, u.lastname AS lastname, p.age AS age, p.url AS url
             FROM signatures AS s
             LEFT JOIN users AS u
             ON s.user_id = u.id
             LEFT JOIN user_profiles AS p
             ON s.user_id = p.user_id
             WHERE LOWER(p.city) = LOWER($1)`,
-            [city]
+            [city || null]
         );
     } else {
         return db.query(
-            `SELECT u.firstname AS firstname, u.lastname AS lastname, p.age AS age, p.city AS city, p.url AS URL
+            `SELECT u.firstname AS firstname, u.lastname AS lastname, p.age AS age, p.city AS city, p.url AS url
             FROM signatures AS s
             LEFT JOIN users AS u
             ON s.user_id = u.id
@@ -46,7 +46,7 @@ exports.createUser = (firstname, lastname, email, pass) => {
     return db.query(
         `INSERT INTO users (firstname, lastname, email, pass)
         VALUES ($1, $2, $3, $4)
-        RETURNING id`,
+        RETURNING id, firstname, lastname`,
         [firstname || null, lastname || null, email || null, pass || null]
     );
 };
@@ -89,15 +89,6 @@ exports.countSigners = city => {
 
 exports.getSignature = function(id) {
     return db.query(`SELECT sig FROM signatures WHERE id = $1`, [id]);
-};
-
-exports.writeUserProfile = (age, city, url, user_id) => {
-    return db.query(
-        `INSERT INTO user_profiles (age, city, url, user_id)
-        VALUES ($1, $2, $3, $4)
-        RETURNING *`,
-        [age || null, city, url, user_id]
-    );
 };
 
 exports.getForm = id => {
@@ -157,4 +148,16 @@ exports.editProfile = input => {
         WHERE user_id = $1`,
         [input || null]
     );
+};
+
+exports.deleteSignatures = function(id) {
+    return db.query(`DELETE FROM signatures WHERE user_id = $1`, [id]);
+};
+
+exports.deleteProfile = function(id) {
+    return db.query(`DELETE FROM user_profiles WHERE user_id = $1`, [id]);
+};
+
+exports.deleteUser = function(id) {
+    return db.query(`DELETE FROM users WHERE id = $1`, [id]);
 };
