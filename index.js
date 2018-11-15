@@ -80,10 +80,10 @@ app.post("/register", (req, res) => {
             res.redirect("/profile");
         })
         .catch(err => {
-            console.log("Error in POST /register: ", err);
+            // console.log("Error in POST /register: ", err);
             res.render("register", {
                 layout: "main",
-                err: err
+                err: "err"
             });
         });
 });
@@ -125,6 +125,9 @@ app.get("/login", (req, res) => {
     }
 });
 
+// var popup = require("popups");
+var alert = require("alert-node");
+
 app.post("/login", (req, res) => {
     db.getUser(req.body.email)
         .then(result => {
@@ -133,13 +136,14 @@ app.post("/login", (req, res) => {
                     if (doesMatch === true) {
                         req.session.userId = result.rows[0].userId;
                         req.session.signaturesId = result.rows[0].signaturesId;
+
                         //console.log(result.rows[0].sig);
                     } else {
-                        throw new Error();
+                        // console.log("Wrong password, please try again");
+                        alert("Wrong password, please try again");
                     }
                 })
                 .then(() => {
-                    console.log("THESE ARE THE RESULTS: ", result);
                     if (req.session.signaturesId == null) {
                         res.redirect("/petition");
                     } else {
@@ -151,7 +155,7 @@ app.post("/login", (req, res) => {
             console.log("error in login: ", err);
             res.render("login", {
                 layout: "main",
-                error: err
+                err: "E-mail or password incorrect, try again."
             });
         });
 });
@@ -314,7 +318,7 @@ app.post("/profile/edit", (req, res) => {
 app.post("/signature/delete", (req, res) => {
     db.deleteSignatures(req.session.signaturesId)
         .then(function() {
-            delete req.session.signaturesId;
+            delete req.session.signaturesId; //req.session.signaturesId = null;
             res.redirect("/petition");
         })
         .catch(function(error) {
@@ -324,7 +328,7 @@ app.post("/signature/delete", (req, res) => {
 
 app.get("/logout", function(req, res) {
     req.session = null;
-    res.redirect("/register");
+    res.redirect("/login");
 });
 
 app.get("*", (req, res) => {

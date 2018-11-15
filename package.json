@@ -13,6 +13,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "alert-node": "^1.2.2",
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.15.2",
         "chalk-animation": "^1.6.0",
