@@ -5,15 +5,25 @@
 
 
 <div id="splash">
-    <h1 align = 'center'>Log in</h1>
 
+<div class="nowar">
+    <div id="text" align='center'>
+        <img id="no_war" align='center' src="baby.png" alt="Baby" height="200" width="500">
+        <p id="par1" align='center'>Save our FUTURE!<br> SAY NO TO WAR! <br> <br> Sign this petition for a
+            safer and a better world. <br> Together, our voice can make the WORLD safe!!!</p>
+    </div>
+
+
+</div class="login">
+
+<h2 align = 'center'>Log in</h2>
     <div id="err">
         {{#if err}}
             <p><span class="error">{{err}}</span></p>
         {{/if}}
     </div>
 
-    <form class="" method="post">
+    <form class="" method="post" align='center'>
         <label for="inp" class="inp">
             <input type="text" name="email" id="inp" placeholder="&nbsp;">
             <span class="label">E-mail</span>
@@ -29,5 +39,7 @@
         <button type="submit">Sign in</button>
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
     </form>
-    <span>Don't have an account yet? <a href="/register">Get it.</a></span>
+    <div align='center'>
+        <span><br>Don't have an account yet? <a href="/register">Get it here ...</a></span>
+    </div>
 </div>

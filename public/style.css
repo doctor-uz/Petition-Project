@@ -12,6 +12,11 @@ header {
     /* float: cursor: help;nter; */
 }
 
+.login {
+    border: 2px dashed #612147;
+    display: flex;
+}
+
 #splash {
     position: relative;
     top: 0;
@@ -29,13 +34,18 @@ header {
     height: 70px;
 }
 
-#no_war {
-    background: transparent;
-    left: 600px;
-    position: fixed;
+.nowar {
     display: flex;
-    top: 210px;
-    border-radius: 30%;
+    position: relative;
+    justify-content: space-around;
+    align-content: center;
+    margin: -30px 200px;
+}
+
+p {
+    font-size: 20px;
+    color: #612147;
+    font-weight: bold;
 }
 
 body {
