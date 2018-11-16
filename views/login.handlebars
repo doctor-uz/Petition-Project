@@ -1,12 +1,31 @@
+<a href="/login" id="login">Log in</a>
+&nbsp &nbsp | &nbsp &nbsp
+<a href="/register" id="register">Register</a>
+<hr>
 
-<div class="petition">
-    <h1>Sign in</h1>
-    {{#if err}}
-        <p><span class="error">{{err}}</span></p>
-    {{/if}}
+
+<div id="splash">
+    <h1 align = 'center'>Log in</h1>
+
+    <div id="err">
+        {{#if err}}
+            <p><span class="error">{{err}}</span></p>
+        {{/if}}
+    </div>
+
     <form class="" method="post">
-        <input type="text" name="email" placeholder="Email Address">
-        <input type="password" name="pass" placeholder="Password">
+        <label for="inp" class="inp">
+            <input type="text" name="email" id="inp" placeholder="&nbsp;">
+            <span class="label">E-mail</span>
+            <span class="border"></span>
+        </label>
+
+        <label for="inp" class="inp">
+            <input type="password" name="pass" id="inp" placeholder="&nbsp;">
+            <span class="label">Password</span>
+            <span class="border"></span>
+        </label>
+
         <button type="submit">Sign in</button>
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
     </form>

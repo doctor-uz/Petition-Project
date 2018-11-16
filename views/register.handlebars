@@ -1,15 +1,40 @@
+<a href="/login" id="login">Log in</a>
+&nbsp &nbsp | &nbsp &nbsp
+<a href="/register" id="register">Register</a>
+<hr>
 
-<div class="petition">
-    <h1>Sign up</h1>
+
+<div class="">
+    <h1 align = 'center'>Register</h1>
     {{#if err}}
         <span class="error">{{err}}</span>
     {{/if}}
     <form class="" method="post">
-        <input type="text" name="firstname" placeholder="First Name">
-        <input type="text" name="lastname" placeholder="Last Name">
-        <input type="text" name="email" placeholder="Email Address">
-        <input type="password" name="pass" placeholder="Password">
-        <button type="submit">Sign Up</button>
+        <label for="inp" class="inp">
+            <input type="text" name="firstname" id="inp" placeholder="&nbsp;">
+            <span class="label">First name</span>
+            <span class="border"></span>
+        </label>
+
+        <label for="inp" class="inp">
+            <input type="text" name="lastname" id="inp" placeholder="&nbsp;">
+            <span class="label">Last name</span>
+            <span class="border"></span>
+        </label>
+
+        <label for="inp" class="inp">
+            <input type="text" name="email" id="inp" placeholder="&nbsp;">
+            <span class="label">E-mail</span>
+            <span class="border"></span>
+        </label>
+
+        <label for="inp" class="inp">
+            <input type="password" name="pass" id="inp" placeholder="&nbsp;">
+            <span class="label">Password</span>
+            <span class="border"></span>
+        </label>
+
+        <button type="submit">Register</button>
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
     </form>
     <span>Already have an account? <a href="/login">Sign in.</a></span>

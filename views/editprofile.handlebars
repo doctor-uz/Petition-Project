@@ -1,13 +1,59 @@
-<div class="petition">
+<div class="petitiona">
 <h1>You may edit your profile here!</h1>
+
+<a href="/logout" id="logout-button">Sign out</a>
+
+
 <form method="POST">
-    <input name="firstname" type="text" placeholder="first name" value={{#profile}}{{firstname}}{{/profile}}></input>
-    <input name="lastname" type="text" placeholder="last name" value={{#profile}}{{lastname}}{{/profile}}></input>
-    <input name="email" type="email" placeholder="email"value={{#profile}}{{email}}{{/profile}}></input>
-    <input name="pass" type="password" placeholder="password"></input>
-    <input name="age" type="text" placeholder="Age" value={{#profile}}{{age}}{{/profile}}></input>
-    <input name="city" type="text" placeholder="City" value={{#profile}}{{city}}{{/profile}}></input>
-    <input name="url" type="url" placeholder="Homepage" value={{#profile}}{{url}}{{/profile}}></input>
+
+    <label for="inp" class="inp">
+        <input name="firstname" type="text" id="inp" placeholder="&nbsp;" value={{#profile}}{{firstname}}{{/profile}}></input>
+        <span class="label">First name</span>
+        <span class="border"></span>
+    </label>
+
+    <label for="inp" class="inp">
+        <input name="lastname" type="text" id="inp" placeholder="&nbsp;" value={{#profile}}{{lastname}}{{/profile}}></input>
+        <span class="label">Last name</span>
+        <span class="border"></span>
+    </label>
+
+
+    <label for="inp" class="inp">
+        <input name="email" type="email" id="inp" placeholder="&nbsp;" value={{#profile}}{{email}}{{/profile}}></input>
+        <span class="label">E-mail</span>
+        <span class="border"></span>
+    </label>
+
+
+    <label for="inp" class="inp">
+        <input name="pass" type="password" id="inp" placeholder="&nbsp;"></input>
+        <span class="label">Password</span>
+        <span class="border"></span>
+    </label>
+
+
+    <label for="inp" class="inp">
+        <input name="age" type="text" id="inp" placeholder="&nbsp;" value={{#profile}}{{age}}{{/profile}}></input>
+        <span class="label">Age</span>
+        <span class="border"></span>
+    </label>
+
+
+    <label for="inp" class="inp">
+        <input name="city" type="text" id="inp" placeholder="&nbsp;" value={{#profile}}{{city}}{{/profile}}></input>
+        <span class="label">City</span>
+        <span class="border"></span>
+    </label>
+
+
+    <label for="inp" class="inp">
+        <input name="url" type="url" id="inp" placeholder="&nbsp;" value={{#profile}}{{url}}{{/profile}}></input>
+        <span class="label">Url</span>
+        <span class="border"></span>
+    </label>
+
+
     <input type="hidden" name="_csrf" value="{{csrfToken}}"></input>
 <button>UPDATE</button>
 </form>

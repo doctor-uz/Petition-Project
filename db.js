@@ -151,11 +151,14 @@ exports.editProfile = input => {
 };
 
 exports.deleteSignatures = function(id) {
-    return db.query(`DELETE FROM signatures WHERE user_id = $1`, [id]);
+    return db.query(`DELETE FROM signatures WHERE id = $1`, [id]);
 };
 
 exports.deleteProfile = function(id) {
-    return db.query(`DELETE FROM user_profiles WHERE user_id = $1`, [id]);
+    return db.query(
+        `DELETE FROM user_profiles WHERE user_profiles.user_id = $1`,
+        [id]
+    );
 };
 
 exports.deleteUser = function(id) {

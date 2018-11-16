@@ -2,6 +2,9 @@
 <div class="petition">
 <h1>{{text}}</h1>
 
+<a href="/logout" id="logout-button">Sign out</a>
+
+
 {{#each signers}}
     {{#if url}}
         <p><a href={{url}}>{{firstname}} {{lastname}}</a> {{age}} <a href="/signers/{{city}}">{{city}}</a></p>

@@ -1,6 +1,13 @@
+<a href="/logout" id="logout-button">Sign out</a>
+
+<hr>
+
+
 <div class="petition">
 <h1>Thank you!</h1>
-<!-- show signature here -->
+
+<img src="/smile.jpg" height="275px" width="375px">
+
 <img src={{base64str}} alt="signature">
 {{#if link}}
     <a href="/signers"><h2>Click here to see the list of signers.</h2></a>
@@ -10,5 +17,10 @@
 <form method="POST" action="/signature/delete">
     <input type="hidden" name="_csrf" value="{{csrfToken}}"></input>
     <button>Click here to delete your signature</button>
+</form>
+
+<form method="POST" action="/profile/delete">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}"></input>
+    <button>delete your profile</button>
 </form>
 </div>

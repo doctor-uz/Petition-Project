@@ -326,6 +326,24 @@ app.post("/signature/delete", (req, res) => {
         });
 });
 
+app.post("/profile/delete", (req, res) => {
+    Promise.all([
+        db.deleteSignatures(req.session.signaturesId),
+        db.deleteProfile(req.session.userId)
+    ])
+        .then(function() {
+            delete req.session.signaturesId; //req.session.signaturesId = null;
+            return db.deleteUser(req.session.userId);
+        })
+        .then(function() {
+            delete req.session.userId;
+            res.redirect("/login");
+        })
+        .catch(err => {
+            console.log("Error ", err);
+        });
+});
+
 app.get("/logout", function(req, res) {
     req.session = null;
     res.redirect("/login");
