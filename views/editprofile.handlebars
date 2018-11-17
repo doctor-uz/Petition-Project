@@ -1,9 +1,15 @@
-<div class="petitiona">
-<h1>You may edit your profile here!</h1>
+<a href="/logout" id="logout-button">Log out</a>
+&nbsp &nbsp | &nbsp &nbsp
+<a href="/signers">List of signers</a>
 
-<a href="/logout" id="logout-button">Sign out</a>
+<hr>
 
 
+
+<div id="splash">
+<h2 align="center">You may edit your profile here:</h2>
+
+<div class="loginedit" align="center">
 <form method="POST">
 
     <label for="inp" class="inp">
@@ -16,7 +22,7 @@
         <input name="lastname" type="text" id="inp" placeholder="&nbsp;" value={{#profile}}{{lastname}}{{/profile}}></input>
         <span class="label">Last name</span>
         <span class="border"></span>
-    </label>
+    </label> <br><br>
 
 
     <label for="inp" class="inp">
@@ -30,7 +36,7 @@
         <input name="pass" type="password" id="inp" placeholder="&nbsp;"></input>
         <span class="label">Password</span>
         <span class="border"></span>
-    </label>
+    </label><br><br>
 
 
     <label for="inp" class="inp">
@@ -44,17 +50,18 @@
         <input name="city" type="text" id="inp" placeholder="&nbsp;" value={{#profile}}{{city}}{{/profile}}></input>
         <span class="label">City</span>
         <span class="border"></span>
-    </label>
+    </label><br><br>
 
 
     <label for="inp" class="inp">
         <input name="url" type="url" id="inp" placeholder="&nbsp;" value={{#profile}}{{url}}{{/profile}}></input>
         <span class="label">Url</span>
         <span class="border"></span>
-    </label>
+    </label><br>
 
 
     <input type="hidden" name="_csrf" value="{{csrfToken}}"></input>
-<button>UPDATE</button>
+<br><br><button>UPDATE</button>
 </form>
+</div>
 </div>

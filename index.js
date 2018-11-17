@@ -155,7 +155,7 @@ app.post("/login", (req, res) => {
             console.log("error in login: ", err);
             res.render("login", {
                 layout: "main",
-                err: "E-mail or password incorrect, try again."
+                err: "The user doesn't exist. Please, register first!"
             });
         });
 });

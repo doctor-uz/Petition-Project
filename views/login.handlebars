@@ -6,20 +6,31 @@
 
 <div id="splash">
 
+
+<div class="pictext">
+<div id="no_war">
+    <img align='center' src="baby.png" alt="Baby" height="200" width="300">
+</div>
+
 <div class="nowar">
     <div id="text" align='center'>
-        <img id="no_war" align='center' src="baby.png" alt="Baby" height="200" width="500">
-        <p id="par1" align='center'>Save our FUTURE!<br> SAY NO TO WAR! <br> <br> Sign this petition for a
-            safer and a better world. <br> Together, our voice can make the WORLD safe!!!</p>
+        <p id="par1" align='center'>SAY NO TO WAR! <br> <br> Please, sign this petition for a
+            peaceful and safer world. <br> Together, our voice can make the WORLD better!!!</p>
     </div>
+</div>
+
+<div id="no_war">
+    <img align='center' src="baby.png" alt="Baby" height="200" width="300">
+</div>
+
+</div>
 
 
-</div class="login">
-
+<div class="login">
 <h2 align = 'center'>Log in</h2>
     <div id="err">
         {{#if err}}
-            <p><span class="error">{{err}}</span></p>
+            <p id="err"><span class="error">{{err}}</span></p>
         {{/if}}
     </div>
 
@@ -34,12 +45,14 @@
             <input type="password" name="pass" id="inp" placeholder="&nbsp;">
             <span class="label">Password</span>
             <span class="border"></span>
-        </label>
+        </label><br><br>
 
         <button type="submit">Sign in</button>
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
     </form>
     <div align='center'>
-        <span><br>Don't have an account yet? <a href="/register">Get it here ...</a></span>
+        <h3><br>Don't have an account yet? <a href="/register">Click here ...</a><br><br></h3>
     </div>
+</div>
+
 </div>

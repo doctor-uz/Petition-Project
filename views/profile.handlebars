@@ -2,14 +2,30 @@
 <hr>
 
 
-<h1>Please, tell us a bit more about yourself!</h1>
+
+<div id="splash">
+
+    <div class="pictext">
+    <div id="no_war">
+        <img align='center' src="baby.png" alt="Baby" height="200" width="300">
+    </div>
+
+    <div class="nowar">
+        <div id="text" align='center'>
+            <p id="par1" align='center'>SAY NO TO WAR! <br> <br> Please, sign this petition for a
+                peaceful and safer world. <br> Together, our voice can make the WORLD better!!!</p>
+        </div>
+    </div>
+
+    <div id="no_war">
+        <img align='center' src="baby.png" alt="Baby" height="200" width="300">
+    </div>
+
+    </div>
 
 
-
-
-<div class="petition">
-    <form method="POST">
-        <h3>please add this information:</h3>
+    <form method="POST" align="center">
+        <h3 id="moreinfo" align="center">Please, tell us a bit more about yourself:</h3>
 
         <label for="inp" class="inp">
             <input name="age" type="text" id="inp" placeholder="&nbsp;"></input>
@@ -33,7 +49,7 @@
 
 
         <input type="hidden" name="_csrf" value="{{csrfToken}}"></input>
-        <button>CONTINUE</button>
+        <br><br><br><button id="continue">CONTINUE</button>
     </form>
 
 </div>

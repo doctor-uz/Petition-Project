@@ -1,14 +1,34 @@
+<a href="/logout" id="login">Log out</a>
+<hr>
 
+<div id="splash">
 
-    <p id="par1">Sign this petition for a safer and a better world.</p>
-        <p id="par2">Together, our voice can make the WORLD safe!!!</p>
+    <div class="pictext">
+    <div id="no_war">
+        <img align='center' src="baby.png" alt="Baby" height="200" width="300">
+    </div>
 
-<a href="/logout" id="logout-button">Sign out</a>
+    <div class="nowar">
+        <div id="text" align='center'>
+            <p id="par1" align='center'>SAY NO TO WAR! <br> <br> Please, sign this petition for a
+                peaceful and safer world. <br> Together, our voice can make the WORLD better!!!</p>
+        </div>
+    </div>
 
-<img id="no_war" src="no_war.jpg" alt="No_wars" height="200" width="200">
+    <div id="no_war">
+        <img align='center' src="baby.png" alt="Baby" height="200" width="300">
+    </div>
 
-<div class = 'petition'>
-    <form id = 'form' method="POST">
+    </div>
+
+<div class="login">
+    <div id="err">
+        {{#if err}}
+        <p id="err">Please, sign the petition to continue!</p>
+        {{/if}}
+    </div>
+
+    <form id = 'form' method="POST" align="center">
         <input type="hidden" name="sig" value="">
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <br><br>
@@ -19,8 +39,6 @@
 
 </div>
 
-{{#if err}}
-    <p id="err">Oppss, something went wrong! <br> Please, fill out all fields!</p>
-{{/if}}
 
+</div>
 <script src="/jquery-3.3.1.min.js" charset="utf-8"></script>
